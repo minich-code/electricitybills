@@ -10,5 +10,9 @@ types-PyYAML
 Flask-Cors
 scikit-learn
 matplotlib
+xgboost
+lightgbm
+catboost
+seaborn
 
 -e .
