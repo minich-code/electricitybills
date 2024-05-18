@@ -72,10 +72,12 @@ class DataIngestion:
                     filename = self.config.local_data_file
             )
             logging.info(f"Downloaded the file {filename} with the following information: \n{headers}")
+
         else:
             # If the file exists get the file size 
             #file_size = get_size(self.config.local_data_file)
             logging.info(f"The file exists and is of size: {get_size(Path(self.config.local_data_file))}")
+
 
 
         # Method to extract the zip file 
