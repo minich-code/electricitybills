@@ -4,8 +4,15 @@ from pathlib import Path
 # Data ingestion entity
 @dataclass
 class DataIngestionConfig:
-    # Define the path to the data ingestion configuration file
     root_dir: Path
     source_URL: str
     local_data_file: Path
     unzip_dir: Path 
+
+# Data validation entity 
+@dataclass
+class DataValidationConfig:
+    root_dir: Path
+    STATUS_FILE: str
+    unzip_data_dir: Path 
+    all_schema: dict
