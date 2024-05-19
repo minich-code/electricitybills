@@ -1,10 +1,15 @@
 import os 
 import pandas as pd 
-import joblib
+import numpy as np 
+import joblib 
+from pathlib import Path 
+from dataclasses import dataclass
 
-from src.ElectricityBill.entity.configuration_entity import DataTransformationConfig
-from src.ElectricityBill.utils.commons import save_object
 from src.ElectricityBill import logging
+from src.ElectricityBill.utils.commons import save_object
+from src.ElectricityBill.constants import CONFIG_FILE_PATH, PARAMS_FILE_PATH, SCHEMA_FILE_PATH
+from src.ElectricityBill.utils.commons import read_yaml, create_directories
+
 
 from sklearn.model_selection import train_test_split
 from sklearn.compose import ColumnTransformer
@@ -12,6 +17,46 @@ from sklearn.pipeline import Pipeline
 from sklearn.impute import SimpleImputer
 from sklearn.preprocessing import StandardScaler, OneHotEncoder
 
+
+@dataclass 
+class DataTransformationConfig:
+    root_dir: Path
+    data_path: Path 
+    numerical_cols: list 
+    categorical_cols: list 
+
+
+# Class for the configuration manager 
+class ConfigurationManager:
+    def __init__(
+        self,
+        config_filepath = CONFIG_FILE_PATH,
+        params_filepath = PARAMS_FILE_PATH,
+        schema_filepath = SCHEMA_FILE_PATH):
+        
+        # Initialize the configuration manager 
+        # Read YAML configurations files to initialize configuration parameters
+        self.config = read_yaml(config_filepath)
+        self.params = read_yaml(params_filepath)
+        self.schema = read_yaml(schema_filepath)
+
+        # Create necessary directories specified in the configuration
+        create_directories([self.config.artifacts_root])
+
+    def get_data_transformation_config(self) -> DataTransformationConfig:
+        config = self.config.data_transformation 
+        
+
+        create_directories([config.root_dir])
+
+
+        data_transformation_config = DataTransformationConfig(
+            root_dir=Path(config.root_dir),
+            data_path=Path(config.data_path),
+            numerical_cols= list(config.numerical_cols),
+            categorical_cols= list(config.categorical_cols)
+        )
+        return data_transformation_config
 
 
 # Create a class to handle the actual data transformation process 
@@ -116,3 +161,26 @@ class DataTransformation:
 
         except Exception as e:
             raise e
+        
+# Pipeline 
+if __name__=="__main__":
+    try:
+        config = ConfigurationManager()
+        data_transformation_config = config.get_data_transformation_config()
+        data_transformation = DataTransformation(config = data_transformation_config)
+        X_train, X_test, y_train, y_test = data_transformation.train_test_splitting()
+        train_data_path, test_data_path, y_train_data_path, y_test_data_path, preprocessor_path= \
+            data_transformation.initiate_data_transformation(X_train, X_test, y_train, y_test) 
+        
+    except Exception as e:
+        logging.exception(e)
+        raise e
+
+    
+
+
+
+
+        
+
+
