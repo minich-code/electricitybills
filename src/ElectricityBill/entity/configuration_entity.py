@@ -25,3 +25,18 @@ class DataTransformationConfig:
     data_path: Path 
     numerical_cols: list 
     categorical_cols: list 
+
+# Model Trainer Entity 
+@dataclass
+class ModelTrainerConfig:
+    root_dir: Path
+    train_data_path: Path
+    test_data_path: Path
+    model_name: str
+    # DecisionTreeRegressor Parameter 
+    criterion: str
+    splitter: str 
+    min_sample_split: int
+    min_samples_leaf: int
+    min_impurity_decrease: float
+    ccp_alpha: float

@@ -1,1 +1,10 @@
-key: val
+DecisionTreeRegressor:
+  criterion: squared_error 
+  splitter: best 
+  min_sample_split: 2
+  min_samples_leaf: 1
+  random_state: null 
+  max_features: log2
+  max_leaf_nodes: numerical_cols
+  min_impurity_decrease: 0.0
+  ccp_alpha: 0.0
