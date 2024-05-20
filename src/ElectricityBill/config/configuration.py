@@ -2,7 +2,8 @@ from src.ElectricityBill.constants import CONFIG_FILE_PATH, PARAMS_FILE_PATH, SC
 from src.ElectricityBill.utils.commons import read_yaml, create_directories, get_size
 from pathlib import Path 
 from src.ElectricityBill.entity.configuration_entity import (DataIngestionConfig, DataValidationConfig,
-                                                             DataTransformationConfig, ModelTrainerConfig) 
+                                                             DataTransformationConfig, ModelTrainerConfig,
+                                                             ModelEvaluationConfig) 
 
 
 # Create a configuration manager class to manage the configurations 
@@ -94,3 +95,23 @@ class ConfigurationManager:
         )
 
         return model_trainer_config
+    
+    def get_model_evaluation_config(self) -> ModelEvaluationConfig:
+        config = self.config.model_evaluation
+        params = self.params.DecisionTreeRegressor
+        schema = self.schema.TARGET_COLUMN
+
+        create_directories([config.root_dir])
+
+        model_evaluation_config = ModelEvaluationConfig(
+            root_dir=config.root_dir,
+            test_data_path=config.test_data_path,
+            test_target_variable= config.test_target_variable,
+            model_path = config.model_path,
+            all_params=params,
+            metric_file_name = config.metric_file_name,
+            target_column = schema.name
+           
+        )
+
+        return model_evaluation_config

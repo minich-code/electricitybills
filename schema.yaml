@@ -12,5 +12,5 @@ COLUMNS:
   TariffRate       : float64
   ElectricityBill  : float64
 
-TARGET_COLUM:
+TARGET_COLUMN:
   name: ElectricityBill
