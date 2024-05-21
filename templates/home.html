@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Electricity Bill Predictor</title>
+        <style>
+            body {
+            font-family: sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            background-color: #f0f0f0;
+            }
+            form {
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            }
+            label {
+            display: block;
+            margin-bottom: 5px;
+            }
+            input[type="number"],
+            input[type="text"],
+            select {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            box-sizing: border-box;
+            }
+            input[type="submit"] {
+            background-color: #007bff;
+            color: white;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            }
+            input[type="submit"]:hover {
+            background-color: #0069d9;
+            }
+            h2 {
+            margin-bottom: 20px;
+            }
+            .prediction {
+            margin-top: 20px;
+            font-size: 18px;
+            font-weight: bold;
+            }
+        </style>
+    </head>
+    <body>
+        <h2>Electricity Bill Predictor</h2>
+        <form method="POST">
+            <label for="Fan">Number of Operation Hours: Fans:</label>
+            <input type="number" id="Fan" name="Fan" value="0" required>
+            <label for="Refrigerator">Number of Operation Hours: Refrigerators:</label>
+            <input type="number" id="Refrigerator" name="Refrigerator" value="0" required>
+            <label for="AirConditioner">Number of Operation Hours: Air Conditioners:</label>
+            <input type="number" id="AirConditioner" name="AirConditioner" value="0" required>
+            <label for="Television">Number of Operation Hours: Televisions:</label>
+            <input type="number" id="Television" name="Television" value="0" required>
+            <label for="Monitor">Number of Operation Hours: Monitors:</label>
+            <input type="number" id="Monitor" name="Monitor" value="0" required>
+            <label for="MotorPump">Number of Operation Hours: Motor Pumps:</label>
+            <input type="number" id="MotorPump" name="MotorPump" value="0" required>
+            <label for="Month">Month:</label>
+            <input type="text" id="Month" name="Month" placeholder="Enter Month" required>
+            <label for="City">City:</label>
+            <select id="City" name="City" required>
+                <option value="Hyderabad">Hyderabad</option>
+                <option value="Navi Mumbai">Navi Mumbai</option>
+                <option value="Ratnagiri">Ratnagiri</option>
+                <option value="Faridabad">Faridabad</option>
+                <option value="Gurgaon">Gurgaon</option>
+                <option value="Ahmedabad">Ahmedabad</option>
+                <option value="New Delhi">New Delhi</option>
+                <option value="Mumbai">Mumbai</option>
+                <option value="Chennai">Chennai</option>
+                <option value="Dahej">Dahej</option>
+                <option value="Nagpur">Nagpur</option>
+                <option value="Noida">Noida</option>
+                <option value="Pune">Pune</option>
+                <option value="Shimla">Shimla</option>
+                <option value="Kolkata">Kolkata</option>
+                <option value="Vadodara">Vadodara</option>
+            </select>
+            <label for="Company">Company:</label>
+            <select id="Company" name="Company" required>
+                <option value="Ringfeder Power Transmission India Pvt. Ltd.">Ringfeder Power Transmission India Pvt. Ltd.</option>
+                <option value="JSW Energy Ltd.">JSW Energy Ltd.</option>
+                <option value="Guj Ind Power">Guj Ind Power</option>
+                <option value="SJVN Ltd.">SJVN Ltd.</option>
+                <option value="Maha Transco – Maharashtra State Electricity Transmission Co, Ltd.">Maha Transco – Maharashtra State Electricity Transmission Co, Ltd.</option>
+                <option value="NTPC Pvt. Ltd.">NTPC Pvt. Ltd.</option>
+                <option value="Optibelt Power Transmission India Private Limited">Optibelt Power Transmission India Private Limited</option>
+                <option value="Kalpataru Power">Kalpataru Power</option>
+                <option value="GE T&D India Limited">GE T&D India Limited</option>
+                <option value="KEC International">KEC International</option>
+                <option value="Reliance Power">Reliance Power</option>
+                <option value="Orient Green">Orient Green</option>
+                <option value="Torrent Power Ltd.">Torrent Power Ltd.</option>
+                <option value="L&T Transmission & Distribution">L&T Transmission & Distribution</option>
+                <option value="Unitech Power Transmission Ltd.">Unitech Power Transmission Ltd.</option>
+                <option value="Power Grid Corp">Power Grid Corp</option>
+                <option value="Jaiprakash Power ">Jaiprakash Power</option>
+                <option value="NLC India">NLC India</option>
+                <option value="Sunil Hitech Eng">Sunil Hitech Eng</option>
+                <option value="Sterlite Power Transmission Ltd">Sterlite Power Transmission Ltd</option>
+                <option value="Adani Power Ltd.">Adani Power Ltd.</option>
+                <option value="Ratnagiri Gas and Power Pvt. Ltd. (RGPPL)">Ratnagiri Gas and Power Pvt. Ltd. (RGPPL)</option>
+                <option value="NHPC">NHPC</option>
+                <option value="Neueon Towers / Sujana Towers Ltd.">Neueon Towers / Sujana Towers Ltd.</option>
+                <option value="Bonfiglioli Transmission Pvt. Ltd.">Bonfiglioli Transmission Pvt. Ltd.</option>
+                <option value="Jyoti Structure">Jyoti Structure</option>
+                <option value="TransRail Lighting">TransRail Lighting</option>
+                <option value="Indowind Energy">Indowind Energy</option>
+                <option value="CESC">CESC</option>
+                <option value="Tata Power Company Ltd.">Tata Power Company Ltd.</option>
+                <option value="Reliance Energy">Reliance Energy</option>
+                <option value="Toshiba Transmission & Distribution Systems (India) Pvt. Ltd.">Toshiba Transmission & Distribution Systems (India) Pvt. Ltd.</option>
+            </select>
+            <label for="MonthlyHours">Total Monthly Hours:</label>
+            <input type="number" id="MonthlyHours" name="MonthlyHours" value="0" required>
+            <label for="TariffRate">Tariff Rate:</label>
+            <input type="number" id="TariffRate" name="TariffRate" step="0.01" value="0.00" required> 
+            <input type="submit" value="Predict">
+        </form>
+        {% if prediction %}
+        <div class="prediction">Predicted Bill Amount: {{ prediction }}</div>
+        {% endif %}
+    </body>
+</html>
