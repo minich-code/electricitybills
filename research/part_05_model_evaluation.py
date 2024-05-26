@@ -1,5 +1,6 @@
 from pathlib import Path
 from dataclasses import dataclass 
+import mlflow
 
 @dataclass()
 class ModelEvaluationConfig:

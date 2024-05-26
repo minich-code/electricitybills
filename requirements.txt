@@ -14,5 +14,7 @@ xgboost
 lightgbm
 catboost
 seaborn
+mlflow
+streamlit
 
 -e .
